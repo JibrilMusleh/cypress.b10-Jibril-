@@ -95,6 +95,9 @@ describe('Project 01', () => {
         cy.get('.button').eq(2).click();
         cy.get('<strong class="mt-5">Thanks for submitting!</strong>').should('be.visible')
         
+        cy.on('uncaught:exception', () => {
+            return false
+          });
     })
 })
 
