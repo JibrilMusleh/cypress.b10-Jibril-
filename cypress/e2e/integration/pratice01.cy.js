@@ -40,12 +40,3 @@ describe("Class_practice01", () => {
 });
 
 
-
-
-
-
-
-
-
-
-

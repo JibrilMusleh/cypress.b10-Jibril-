@@ -1,41 +1,43 @@
 /// <reference types="cypress"/>
 
-describe("Handling Multiple Windows", () => {
-    beforeEach(() => {
-      cy.visit("https://www.techglobal-training.com/frontend");
-      cy.clickCard('Multiple Windows')
-    });
-  
-    it("Tabs", () => {
-  
-      cy.get('#microsoft').should('have.attr', 'target', '_blank')
-  
-      cy.get('#microsoft').invoke('removeAttr', 'target').click()
-  
-      // cy.url().should('contains', 'microsoft')
-    });
-  
-      /**
-     * Go to https://techglobal-training.com/frontend/
-     * Click on the "Multiple Windows" card
-     * Click on the "Apple" link
-     * Validate that the child window title is "Apple"
-     * Navigate back to main page
-     * Validate title contains "techglobal"
-     */
-  
-      it('Test Case', () => {
-        cy.get('#apple').invoke('removeAttr', 'target').click()
-
-        cy.title().should('eq', 'Apple')
-
-        cy.go(-1)
-
-        cy.title().then((title) => {
-            cy.wrap(title.toLocaleLowerCase()).should('contain', 'techglobal')
-        })
-      })
+describe("Class_practice01", () => {
+  beforeEach(() => {
+      cy.visit("https://www.google.com/");
   });
+
+  it('Validate the Google Home Page Title and URL', () => {
+      cy.title().should('eq', 'Google')
+      cy.url().should('eq', 'https://www.google.com/')
+  });
+  it('Validate the Google Logo Presence', () => {
+      cy.title().should('eq', 'Google')
+      cy.url().should('eq', 'https://www.google.com/')
+      cy.get('#hplogo img').should('be.visible');
+  });
+  it('Validate the Google Search Results', () => {
+      cy.get('#APjFqb').type('Cypress{enter}');
+      cy.get('.dURPMd > div').should('have.length.gte', 0)
+
+      cy.on('uncaught:exception', () => {
+          return false
+        });
+  });
+  it('Validate the Google Search Autocomplete Suggestions', () => {
+
+      cy.visit('https://www.google.com/');
+      cy.get('#APjFqb').type('Artificial Intelligence');
+      cy.get('[data-view-type="1"]').should('have.length.gte', 1)
+      cy.get('[data-view-type="1"]').first().click();
+      cy.url().should('include', 'q=artificial+intelligence');
+
+      cy.on('uncaught:exception', () => {
+          return false
+        });
+  });
+  cy.on('uncaught:exception', () => {
+      return false
+    });
+});
 
   
   
